@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<context:component-scan base-package="com"></context:component-scan>
+<mvc:annotation-driven></mvc:annotation-driven>
+<!-- 如果使用属性的set访问注入属性值，必须有空的构造方法 -->
+<bean class="com.st.bean.User" id="user">
+<property name="username" value="张三"></property>
+<property name="sex" value="男"></property>
+<property name="age" value="12"></property>
+
+</bean>
+
+<!--通过构造方法的参数顺序注入属性值-->
+<bean class="com.st.bean.User" id='user2'>
+<constructor-arg index="0" value="李四"></constructor-arg>
+<constructor-arg index="1" value="女"></constructor-arg>
+<constructor-arg index="2" value='23'></constructor-arg>
+</bean>
+
+<bean class="com.st.bean.User" id='user3'>
+<constructor-arg type= "int" value='25 '></constructor-arg>
+<constructor-arg type= 'String' value="女"></constructor-arg>
+<constructor-arg type= "String" value=" 王五"></constructor-arg>
+</bean>
+
+<bean class="com.st.bean.BuMen" id="xxb">
+<property name="name" value="信息部"></property>
+<property name="boss" ref="user3"></property>
+<property name="userlist">
+<list>
+<ref bean="user2"></ref>
+<ref bean="user1"></ref>
+</list>
+</property>
+</bean>
+
+</beans>
